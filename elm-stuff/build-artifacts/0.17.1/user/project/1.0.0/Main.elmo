@@ -1,0 +1,113 @@
+var _user$project$Main$playerToColor = function (maybePlayer) {
+	var _p0 = maybePlayer;
+	if (_p0.ctor === 'Just') {
+		switch (_p0._0.ctor) {
+			case 'Red':
+				return 'Red';
+			case 'Blue':
+				return 'Blue';
+			case 'Yellow':
+				return 'Yellow';
+			default:
+				return 'Green';
+		}
+	} else {
+		return 'Black';
+	}
+};
+var _user$project$Main$viewSquare = function (gridSquare) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html_Attributes$property,
+				'className',
+				_elm_lang$core$Json_Encode$string(
+					A2(
+						_elm_lang$core$String$join,
+						' ',
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$core$Basics_ops['++'],
+								'playerColor',
+								_user$project$Main$playerToColor(gridSquare.player)),
+								A2(
+								_elm_lang$core$Basics_ops['++'],
+								'borderColor',
+								_user$project$Main$playerToColor(gridSquare.player))
+							]))))
+			]),
+		function () {
+			var _p1 = gridSquare.player;
+			if (_p1.ctor === 'Just') {
+				return _elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(_p1._0))
+					]);
+			} else {
+				return _elm_lang$core$Native_List.fromArray(
+					[]);
+			}
+		}());
+};
+var _user$project$Main$view = function (model) {
+	var gridSquare = A2(
+		_elm_lang$core$Dict$get,
+		{ctor: '_Tuple2', _0: 0, _1: 0},
+		model.grid);
+	var _p2 = gridSquare;
+	if (_p2.ctor === 'Just') {
+		return _user$project$Main$viewSquare(_p2._0);
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	}
+};
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p3 = msg;
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _user$project$Main$GridSquare = F2(
+	function (a, b) {
+		return {player: a, finish: b};
+	});
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {currentPlayer: a, grid: b};
+	});
+var _user$project$Main$Green = {ctor: 'Green'};
+var _user$project$Main$Yellow = {ctor: 'Yellow'};
+var _user$project$Main$Blue = {ctor: 'Blue'};
+var _user$project$Main$Red = {ctor: 'Red'};
+var _user$project$Main$initialModel = function () {
+	var initialGrid = _elm_lang$core$Dict$fromList(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{
+				ctor: '_Tuple2',
+				_0: {ctor: '_Tuple2', _0: 0, _1: 0},
+				_1: {
+					player: _elm_lang$core$Maybe$Just(_user$project$Main$Red),
+					finish: _elm_lang$core$Maybe$Nothing
+				}
+			}
+			]));
+	return {currentPlayer: _user$project$Main$Red, grid: initialGrid};
+}();
+var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$Main$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Main$init, view: _user$project$Main$view, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions})
+};
+var _user$project$Main$NoOp = {ctor: 'NoOp'};
